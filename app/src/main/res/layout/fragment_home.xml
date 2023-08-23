@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/login_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/btn_today_date"
+                android:layout_width="60dp"
+                android:layout_height="36dp"
+                android:background="@drawable/box_date"
+                android:text="오늘"
+                android:textColor="#455A64"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/btn_month_date"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_month_date"
+                android:layout_width="60dp"
+                android:layout_height="36dp"
+                android:background="@drawable/box_date"
+                android:text="월별"
+                android:textColor="#455A64"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--월별 -->
+            <LinearLayout
+                android:id="@+id/calendar_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_today_date">
+
+                <ImageButton
+                    android:id="@+id/leftButton"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    android:background="@color/white"
+                    android:src="@drawable/baseline_arrow_back_ios_new_24" />
+
+                <TextView
+                    android:id="@+id/yearMonthTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="2021년 9월"
+                    android:textColor="#263238"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/rightButton"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    android:background="@color/white"
+                    android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+            </LinearLayout>
+
+            <!-- 일별 -->
+            <LinearLayout
+                android:id="@+id/calendar_day_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_today_date">
+
+                <ImageButton
+                    android:id="@+id/day_leftButton"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    android:background="@color/white"
+                    android:src="@drawable/baseline_arrow_back_ios_new_24" />
+
+                <TextView
+                    android:id="@+id/day_TextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="2021년8월31일~9월5일"
+                    android:textColor="#263238"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/day_rightButton"
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    android:background="@color/white"
+                    android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+            </LinearLayout>
+
+            <!--월별 달력 요일-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dayOfTheWeek_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/calendar_date" />
+
+            <!-- 일별 달력 -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/dayCalendarViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/calendar_day_date" />
+
+            <!-- 월별 달력 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dayOfTheWeek_recyclerView"
+                app:useMaterialThemeColors="false">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/calendarViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scrollbars="vertical"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>
